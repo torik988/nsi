@@ -175,7 +175,7 @@
         let clicks = 0;
         title.addEventListener('click', function(event) {
             clicks++;
-            if (clicks === 5) {
+            if (clicks === 14) {
                 changeBackgroundColor();
                 playSound();
             }
@@ -206,7 +206,7 @@
 
         // Fonction pour jouer le son
         function playSound() {
-            const audio = new Audio('./secret.mp3'); // Remplacez "votre_fichier_audio.mp3" par le chemin vers votre fichier audio
+            const audio = new Audio('./secret.mp3'); // Remplacez "secret" 
             audio.play();
         }
 
