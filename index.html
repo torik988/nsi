@@ -7,13 +7,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #add8e6; /* Bleu ciel */
+            background-color: #add8e6; /* Couleur de fond bleu ciel */
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             height: 100vh;
+            position: relative; /* Ajout pour positionner les images */
         }
 
         .timeline {
@@ -87,6 +88,14 @@
 
         .shake-button {
             animation: shake 0.5s ease;
+        }
+
+        /* Style pour les images de chat */
+        .cat-image {
+            position: absolute;
+            width: 90px; /* Définissez la largeur de l'image de chat à 90 pixels */
+            height: auto; /* Maintenez le rapport hauteur/largeur */
+            pointer-events: none; /* Évitez que les images interfèrent avec les clics */
         }
     </style>
 </head>
@@ -169,15 +178,21 @@
 
     <button class="show-all-button" id="showAllButton">Afficher tout</button>
 
+    <audio id="secretSound">
+        <source src="secret.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
+        let secretMode = false; // Variable pour indiquer si le mode secret est activé
+
         // Changement de couleur aléatoire du fond lors du clic sur "Frise Chronologique"
         const title = document.getElementById('title');
         let clicks = 0;
         title.addEventListener('click', function(event) {
             clicks++;
-            if (clicks === 14) {
-                changeBackgroundColor();
-                playSound();
+            if (clicks === 5) {
+                activateSecretMode();
             }
             // Ajouter la classe shake-button pour déclencher l'animation
             this.classList.add('shake-button');
@@ -189,7 +204,31 @@
             event.stopPropagation(); // Empêcher la propagation de l'événement aux éléments enfants
         });
 
-        // Fonction pour changer la couleur de fond de manière aléatoire
+        // Fonction pour activer le mode secret
+        function activateSecretMode() {
+            secretMode = true;
+            // Ajoutez un gestionnaire d'événements clic sur l'ensemble de la page
+            document.body.addEventListener('click', addCatImage);
+            // Change la couleur de fond en boucle
+            changeBackgroundColor();
+            // Joue le son secret
+            playSecretSound();
+        }
+
+        // Fonction pour ajouter une image de chat à l'endroit où l'utilisateur a cliqué
+        function addCatImage(event) {
+            if (secretMode) {
+                const catImage = document.createElement('img');
+                catImage.src = 'cat.png';
+                catImage.classList.add('cat-image');
+                // Positionnez l'image de chat à l'endroit où l'utilisateur a cliqué
+                catImage.style.left = `${event.pageX - 45}px`; // Déplacez l'image de chat de moitié de sa largeur vers la gauche pour la centrer
+                catImage.style.top = `${event.pageY - 45}px`; // Déplacez l'image de chat de moitié de sa hauteur vers le haut pour la centrer
+                document.body.appendChild(catImage);
+            }
+        }
+
+        // Fonction pour changer la couleur de fond de manière aléatoire en boucle
         function changeBackgroundColor() {
             const body = document.querySelector('body');
             let intervalId;
@@ -204,21 +243,12 @@
             }, 150); // Intervalle entre chaque changement de couleur (en millisecondes)
         }
 
-        // Fonction pour jouer le son
-        function playSound() {
-            const audio = new Audio('./secret.mp3'); // Remplacez "secret" 
+        // Fonction pour jouer le son secret
+        function playSecretSound() {
+            const audio = document.getElementById('secretSound');
+            audio.loop = true; // Jouer le son en boucle
             audio.play();
         }
-
-        // Fonction pour activer l'affichage de toutes les descriptions lors du clic sur le bouton "Afficher tout"
-        const showAllButton = document.getElementById('showAllButton');
-        showAllButton.addEventListener('click', function() {
-            const descriptions = document.querySelectorAll('.description');
-            descriptions.forEach(description => {
-                description.style.display = 'block';
-            });
-            this.style.display = 'none'; // Masquer le bouton après usage
-        });
 
         // Fonction pour activer/désactiver l'affichage des descriptions lors du clic sur les dates
         document.addEventListener('DOMContentLoaded', function() {
@@ -235,6 +265,16 @@
                     event.stopPropagation(); // Empêcher la propagation de l'événement aux éléments parents
                 });
             });
+        });
+
+        // Fonction pour activer l'affichage de toutes les descriptions lors du clic sur le bouton "Afficher tout"
+        const showAllButton = document.getElementById('showAllButton');
+        showAllButton.addEventListener('click', function() {
+            const descriptions = document.querySelectorAll('.description');
+            descriptions.forEach(description => {
+                description.style.display = 'block';
+            });
+            this.style.display = 'none'; // Masquer le bouton après usage
         });
     </script>
 </body>
