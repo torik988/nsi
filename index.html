@@ -221,7 +221,7 @@
         function addCatImage(event) {
             if (secretMode) {
                 const catImage = document.createElement('img');
-                catImage.src = 'cat.png';
+                catImage.src = './assets/cat.png';
                 catImage.classList.add('cat-image');
                 // Positionnez l'image de chat à l'endroit où l'utilisateur a cliqué
                 catImage.style.left = `${event.pageX - 45}px`; // Déplacez l'image de chat de moitié de sa largeur vers la gauche pour la centrer
