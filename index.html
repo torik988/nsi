@@ -6,316 +6,57 @@
     <title>Frise Chronologique</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #add8e6; /* Couleur de fond bleu ciel */
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            min-height: 100vh; /* Utilisation de min-height pour s'assurer que l'espacement est respecté */
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            position: relative; /* Ajout pour positionner les images */
-        }
-        .event img {
-            width: 100px;
-            height: 100px;
-            display: block;
-            margin: 0 auto;   /*partie pour les ilustrations*/
-        }
-        .timeline {
-            width: 90%;
-            max-width: 800px;
+            background-image: url('./assets/bg.jpg'); /* Chemin vers votre image */
+            background-size: cover; /* Assurez-vous que l'image couvre toute la fenêtre */
+            background-position: center; /* Centrez l'image */
+            background-repeat: no-repeat; /* Empêche la répétition de l'image */
         }
 
-        .event {
-            background-color: #fff;
-            border: 2px solid #666;
-            border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 20px;
-            cursor: pointer;
-        }
-
-        .event-content {
-            cursor: pointer;
-        }
-
-        .date {
-            font-size: 24px;
-            color: #f70707;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .description {
-            font-size: 16px;
-            color: #333;
-            display: none;
-            text-align: center;
-        }
-
-        .event.active .description {
-            display: block;
-        }
-
-        .frise-title {
-            font-size: 24px;
-            color: #fff;
-            background-color: #333;
-            padding: 10px;
-            text-align: center;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            width: 200px;
-        }
-
-        .show-all-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px;
-            background-color: #333;
-            color: #fff;
+        .button {
+            width: 45%;
+            height: 55px; /* Prendra 10% de la hauteur de la fenêtre */
+            font-size: 25px;
+            background-color: #4CAF50;
+            color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 75px;
             cursor: pointer;
-            z-index: 1;
-        }
-
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-            100% { transform: translateX(0); }
-        }
-
-        .shake-button {
-            animation: shake 0.5s ease;
-        }
-
-        /* Style pour les images de chat */
-        .cat-image {
-            position: absolute;
-            width: 90px; /* Définissez la largeur de l'image de chat à 90 pixels */
-            height: auto; /* Maintenez le rapport hauteur/largeur */
-            pointer-events: none; /* Évitez que les images interfèrent avec les clics */
+            margin-bottom: 7%; /* Espacement avec le bas de la page */
         }
     </style>
 </head>
 <body>
 
-    <div class="frise-title" id="title">Frise Chronologique</div>
+<button id="page1" class="button">1645 - 2014</button>
+<button id="page2" class="button">2015 - 2024</button>
 
-    <div class="timeline">
-        <div class='event' id='event-1645' data-img="1645.jpg"><div class="date">1645</div><div class="description">Invention de la Machine à calculer manuelle (appelée la Pascaline) par Blaise Pascal.</div></div>
-        <div class='event' id='event-1703' data-img="1703.jpg"><div class="date">1703</div><div class="description">Création de l'arithmétique Binaire par Leibniz.</div></div>
-        <div class='event' id='event-1725' data-img="1725.jpg"><div class="date">1725</div><div class="description">Invention du métier à tisser semi-automatique (Ruban perforé) par Basile Bouchon.</div></div>
-        <div class='event' id='event-1822' data-img="1822.jpg"><div class="date">1822</div><div class="description">Invention de la première machine à calculer automatique appelée Machine à différences par Charles Babbage.</div></div>
-        <div class='event' id='event-1843' data-img="1843.jpg"><div class="date">1843</div><div class="description">Écriture du premier algorithme par Ada Lovelace.</div></div>
-        <div class='event' id='event-1851' data-img="1851.jpg"><div class="date">1851</div><div class="description">Invention du Télecopieur, ancètre du fax par Alexander Bain.</div></div>
-        <div class='event' id='event-1936' data-img="1936.jpg"><div class="date">1936</div><div class="description">Création de la machine de Turing par Alan Turing.</div></div>
-        <div class='event' id='event-1942' data-img="1942.jpg"><div class="date">1942</div><div class="description">Décryptage de Enigma par Alan Turing.</div></div>
-        <div class='event' id='event-1943' data-img="1943.jpg"><div class="date">1943</div><div class="description">Création du Plankalkül, premier langage de programmation par Konrad Zuse.</div></div>
-        <div class='event' id='event-1945' data-img="1945.jpg"><div class="date">1945</div><div class="description">Invention des documents hypertextes par Vannevar Bush.</div></div>
-        <div class='event' id='event-1947' data-img="1947.jpg"><div class="date">1947</div><div class="description">Création du premier transistor, fondements des ordinateurs par John Bardeen, William Shockley et Walter Brattain.</div></div>
-        <div class='event' id='event-1950' data-img="1950.png"><div class="date">1950</div><div class="description">Création du test de Turing par Alan Turing.</div></div>
-        <div class='event' id='event-1951' data-img="1951.jpg"><div class="date">1951</div><div class="description">Création du premier compilateur par Grace Murray Hopper.</div></div>
-        <div class='event' id='event-1956' data-img="1956.jpg"><div class="date">1956</div><div class="description">Commercialisation du premier ordinateur à disque dur par IBM et Reynold Johnson.</div></div>
-        <div class='event' id='event-1958' data-img="1958.jpg"><div class="date">1958</div><div class="description">Création des premiers circuits intégrés par Robert Noyce et Jack Kilby.</div></div>
-        <div class='event' id='event-1960' data-img="1960.jpg"><div class="date">1960</div><div class="description">Création du premier ordinateur Multi Processeur (Gamma 60) par Bull (société française).</div></div>
-        <div class='event' id='event-1963' data-img="1963.jpg"><div class="date">1963</div><div class="description">Création de la première souris par Douglas Carl Engelbart.</div></div>
-        <div class='event' id='event-1967' data-img="1967.jpg"><div class="date">1967</div><div class="description">Commercialisation des disquettes par IBM.</div></div>
-        <div class='event' id='event-1969' data-img="1969.png"><div class="date">1969</div><div class="description">Création de ARPANET, ancêtre d'Internet par le Ministère américain de la Défense (DARPA).</div></div>
-        <div class='event' id='event-1970' data-img="1970.jpg"><div class="date">1970</div><div class="description">Création du premier microprocesseur de INTEL par INTEL.</div></div>
-        <div class='event' id='event-1970-2' data-img="1970-2.jpg"><div class="date">1970</div><div class="description">Développement de la fibre optique utilisable dans les télécommunications par Corning Glass Work.</div></div>
-        <div class='event' id='event-1971' data-img="1971.png"><div class="date">1971</div><div class="description">Création du Darknet.</div></div>
-        <div class='event' id='event-1971-2' data-img="1971-2.jpg"><div class="date">1971</div><div class="description">Création du premier casque à réalité virtuelle par Daniel Vickers.</div></div>
-        <div class='event' id='event-1973' data-img="1973.jpg"><div class="date">1973</div><div class="description">Création du standard ETHERNET par le Centre de recherche Xerox de Palo Alto.</div></div>
-        <div class='event' id='event-1975' data-img="1975.png"><div class="date">1975</div><div class="description">Fondation de Microsoft par Bill Gates et Paul Allen.</div></div>
-        <div class='event' id='event-1976' data-img="1976.jpg"><div class="date">1976</div><div class="description">Fondation de Apple par Steve Jobs et Steve Wozniak.</div></div>
-        <div class='event' id='event-1977' data-img="1977.jpg"><div class="date">1977</div><div class="description">Invention de la cryptographie par clé publique (RSA) par Ronald L. Rivest, Adi Shamir et Leonard M. Adleman.</div></div>
-        <div class='event' id='event-1977-2' data-img="1977-2.jpg"><div class="date">1977</div><div class="description">Premier programme informatique à remporter un tournoi d'échecs par Ben Mittman.</div></div>
-        <div class='event' id='event-1977-3' data-img="1977-3.jpg"><div class="date">1977</div><div class="description">Commercialisation du Commodore Pet par Commodore.</div></div>
-        <div class='event' id='event-1978' data-img="1978.jpg"><div class="date">1978</div><div class="description">Présentation au public du Minitel par Bernard Marti.</div></div>
-        <div class='event' id='event-1979' data-img="1979.jpg"><div class="date">1979</div><div class="description">Déploiement du premier service de courrier électronique par Ray Tomlinson.</div></div>
-        <div class='event' id='event-1980' data-img="1980.jpg"><div class="date">1980</div><div class="description">Invention du Compact Disc par Philips et Sony.</div></div>
-        <div class='event' id='event-1982' data-img="1982.jpg"><div class="date">1982</div><div class="description">Création du protocole TCP/IP par Vinton Gray Cerf dit Vint Cerf et Bob Kahn.</div></div>
-        <div class='event' id='event-1983' data-img="1983.png"><div class="date">1983</div><div class="description">Création du langage de programmation C++ par Bjarne Stroustrup.</div></div>
-        <div class='event' id='event-1983-2' data-img="1983-2.jpg"><div class="date">1983</div><div class="description">Commercialisation de l'Apple Lisa, premier ordinateur avec une interface graphique par APPLE.</div></div>
-        <div class='event' id='event-1984' data-img="1984.jpg"><div class="date">1984</div><div class="description">Création de MacOS et du Macintosh par APPLE.</div></div>
-        <div class='event' id='event-1985' data-img="1985.png"><div class="date">1985</div><div class="description">Création de la version 1.0 de Windows par Microsoft.</div></div>
-        <div class='event' id='event-1987' data-img="1987.jpg"><div class="date">1987</div><div class="description">10 000 ordinateurs sont connectés à Internet.</div></div>
-        <div class='event' id='event-1988' data-img="1988.png"><div class="date">1988</div><div class="description">Création du premier logiciel anti-virus par Bernd Fix.</div></div>
-        <div class='event' id='event-1989' data-img="1989.png"><div class="date">1989</div><div class="description">Invention du World Wide Web par Tim Berners-Lee.</div></div>
-        <div class='event' id='event-1990' data-img="1990.jpg"><div class="date">1990</div><div class="description">Début d'Internet grand public.</div></div>
-        <div class='event' id='event-1991' data-img="1991.jpg"><div class="date">1991</div><div class="description">Création du protocole HTTP par Tim Berners-Lee et Robert Cailliau.</div></div>
-        <div class='event' id='event-1991-2' data-img="1991-2.jpg"><div class="date">1991</div><div class="description">Création du premier noyau (kernel) Linux par Linus Torvalds.</div></div>
-        <div class='event' id='event-1991-3' data-img="1991-3.jpg"><div class="date">1991</div><div class="description">Création des premiers SSD par SanDisk.</div></div>
-        <div class='event' id='event-1991-4' data-img="1991-4.jpg"><div class="date">1991</div><div class="description">Création du langage de programmatioin Python par Guido van Rossum.</div></div>
-        <div class='event' id='event-1992' data-img="1992.jpg"><div class="date">1992</div><div class="description">Création du langage HTML par Tim Berners-Lee.</div></div>
-        <div class='event' id='event-1995' data-img="1995.jpg"><div class="date">1995</div><div class="description">Création du DVD par Warren Lieberfarb.</div></div>
-        <div class='event' id='event-1995-2' data-img="1995-2.jpg"><div class="date">1995</div><div class="description">Création du langage de programmation Java par James Gosling.</div></div>
-        <div class='event' id='event-1995-3' data-img="1995-3.png"><div class="date">1995</div><div class="description">Sortie de Windows 95 par Microsoft.</div></div>
-        <div class='event' id='event-1996' data-img="1996.jpg"><div class="date">1996</div><div class="description">Création de Tux, mascotte de Linux par Linus Torvalds.</div></div>
-        <div class='event' id='event-1996-2' data-img="1996-2.jpg"><div class="date">1996</div><div class="description">DeepBlue, programme d'echec vainc le champion d'echec Garry Kasparov.</div></div>
-        <div class='event' id='event-1997' data-img="1997.png"><div class="date">1997</div><div class="description">création du protocole de comunication sans fil WIFI par le groupe de travail 11 du comité de l'IEEE</div></div>
-        <div class='event' id='event-1998' data-img="1998.png"><div class="date">1998</div><div class="description">Fondation de Google par Larry Page et Sergueï Brin.</div></div>
-        <div class='event' id='event-2001' data-img="2001.jpg"><div class="date">2001</div><div class="description">Fondation de Wikipedia par Jimmy Wales.</div></div>
-        <div class='event' id='event-2002' data-img="2002.png"><div class="date">2002</div><div class="description">Création de LibreOffice, suite de logiciels libres par la Document Foundation.</div></div>
-        <div class='event' id='event-2004' data-img="2004.png"><div class="date">2004</div><div class="description">Fondation de Facebook par Mark Zuckerberg, Chris Hughes, Eduardo Saverin, Andrew McCollum et Dustin Moskovitz.</div></div>
-        <div class='event' id='event-2004-2' data-img="2004-2.jpg"><div class="date">2004</div><div class="description">Création de Ubuntu par Mark Shuttleworth.</div></div>
-        <div class='event' id='event-2005' data-img="2005.jpg"><div class="date">2005</div><div class="description">Création de YouTube par Chad Hurley, Steve Chen et Jawed Karim.</div></div>
-        <div class='event' id='event-2007' data-img="2007.jpg"><div class="date">2007</div><div class="description">Sortie de Windows Vista par Microsoft.</div></div>
-        <div class='event' id='event-2007-2' data-img="2007-2.jpg"><div class="date">2007</div><div class="description">Sortie de l'iPhone par APPLE.</div></div>
-        <div class='event' id='event-2007-3' data-img="2007-3.jpg"><div class="date">2007</div><div class="description">Sortie de Google Street View par GOOGLE.</div></div>
-        <div class='event' id='event-2009' data-img="2009.png"><div class="date">2009</div><div class="description">Création du Bitcoin par Satoshi Nakamoto (pseudo).</div></div>
-        <div class='event' id='event-2010' data-img="2010.jpg"><div class="date">2010</div><div class="description">Sortie de l'iPad par APPLE.</div></div>
-        <div class='event' id='event-2011' data-img="2011.jpg"><div class="date">2011</div><div class="description">Les ventes de smartphone dépassent celles des ordinateurs.</div></div>
-        <div class='event' id='event-2012' data-img="2012.png"><div class="date">2012</div><div class="description">Sortie de Windows 8 par MICROSOFT.</div></div>
-        <div class='event' id='event-2013' data-img="2013.png"><div class="date">2013</div><div class="description">Lancement de Qwant, navigateur français garantissant la vie privée par Éric Léandri, Patrick Constant et Jean-Manuel Rozan.</div></div>
-        <div class='event' id='event-2014' data-img="2014.png"><div class="date">2014</div><div class="description">Émergence de l'Internet des objets (IoT) et des objets connectés par Kevin Ashton (le concept).</div></div>
-        <div class='event' id='event-2015' data-img="2015.jpg"><div class="date">2015</div><div class="description">Essor du Deep Learning par Yann Le Cun.</div></div>
-        <div class='event' id='event-2015-2' data-img="2015-2.png"><div class="date">2015</div><div class="description">Sortie de Windows 10 par MICROSOFT.</div></div>
-        <div class='event' id='event-2015-3' data-img="2015-3.jpg"><div class="date">2015</div><div class="description">Premier booster de fusée entièrement reutilisable par Space X</div></div>
-        <div class='event' id='event-2016' data-img="2016.jpg"><div class="date">2016</div><div class="description">Essor de l'impression 3D dans l'industrie.</div></div>
-        <div class='event' id='event-2018' data-img="2018.png"><div class="date">2018</div><div class="description">Création du Règlement Général de la Protection des Données (RGPD) par la Commission Européenne.</div></div>
-        <div class='event' id='event-2019' data-img="2019.jpg"><div class="date">2019</div><div class="description">Starlink, premier service d'acces a internet par satelite a haut debit.</div></div>
-        <div class='event' id='event-2021' data-img="2021.png"><div class="date">2021</div><div class="description">Sortie de Windows 11 par MICROSOFT.</div></div>
-        <div class='event' id='event-2022' data-img="2022.png"><div class="date">2022</div><div class="description">Sortie de la première version de ChatGPT par OpenAI.</div></div>
-        <div class='event' id='event-2023' data-img="2023.jpg"><div class="date">2023</div><div class="description">Essor de l'intelligence artificielle.</div></div>
-        <div class='event' id='event-2023-2' data-img="2023-2.png"><div class="date">2023</div><div class="description">Publication de Llama2, model d'Inteligence Artificielle open source et gratuit</div></div>
-    </div>
-
-    <button class="show-all-button" id="showAllButton">Afficher tout</button>
-
-    <audio id="secretSound">
-        <source src="./assets/audio/secret2.mp3" type="audio/mpeg">
-    
-    </audio>
-
-    <script>
-        let secretMode = false; // Variable pour indiquer si le mode secret est activé
-        let hoverCount = 0; // Compteur de survols du bouton
-
-        // Changement de couleur aléatoire du fond lors du survol de "Frise Chronologique"
-        const title = document.getElementById('title');
-        title.addEventListener('mouseenter', function(event) {
-            hoverCount++;
-            if (hoverCount === 17) {
-                activateSecretMode();
-                this.classList.add('shake-button');// Ajouter la classe shake-button pour déclencher l'animation
-                setTimeout(() => {
-                    this.classList.remove('shake-button');// Supprimer la classe shake-button après 0.5s pour réinitialiser l'animation
-                }, 500);
-            }
-            event.stopPropagation(); // Empêcher la propagation de l'événement aux éléments enfants
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const openNewPageButton1 = document.getElementById('page1');
+        openNewPageButton1.addEventListener('click', function() {
+            // Spécifiez l'URL de la nouvelle page ici
+            const newPageURL = 'frise-1645-2014.html';
+            // Ouvre une nouvelle fenêtre ou un nouvel onglet avec l'URL spécifiée
+            window.open(newPageURL, '_blank');
         });
+    });
 
-        // Fonction pour activer le mode secret
-        function activateSecretMode() {
-            secretMode = true;
-            // Ajoutez un gestionnaire d'événements clic sur l'ensemble de la page
-            playSecretSound();
-            document.body.addEventListener('click', addCatImage);
-            // Change la couleur de fond en boucle
-            changeBackgroundColor();
-            // Joue le son secret
-            
-        }
-
-        // Fonction pour ajouter une image de chat à l'endroit où l'utilisateur a cliqué
-        function addCatImage(event) {
-            if (secretMode) {
-                const catImage = document.createElement('img');
-                catImage.src = './assets/cat.png';
-                catImage.classList.add('cat-image');
-                // Positionnez l'image de chat à l'endroit où l'utilisateur a cliqué
-                catImage.style.left = `${event.pageX - 45}px`; // Déplacez l'image de chat de moitié de sa largeur vers la gauche pour la centrer
-                catImage.style.top = `${event.pageY - 45}px`; // Déplacez l'image de chat de moitié de sa hauteur vers le haut pour la centrer
-                document.body.appendChild(catImage);
-            }
-        }
-
-        // Fonction pour changer la couleur de fond de manière aléatoire en boucle
-        function changeBackgroundColor() {
-            const body = document.querySelector('body');
-            let intervalId;
-            let count = 0;
-            intervalId = setInterval(() => {
-                const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16); // Générer une couleur hexadécimale aléatoire
-                body.style.backgroundColor = randomColor;
-                count++;
-            }, 150); // Intervalle entre chaque changement de couleur (en millisecondes)
-        }
-
-        // Fonction pour jouer le son secret
-        function playSecretSound() {
-            const audio = document.getElementById('secretSound');
-            audio.loop = false; // Jouer le son en boucle
-            audio.play();
-        }
-        
-        let showAllClicked = false; // Variable globale pour suivre l'état de "Afficher tout"
-
-        // Fonction pour activer/désactiver l'affichage des descriptions lors du clic sur les dates
-        document.addEventListener('DOMContentLoaded', function() {
-            const events = document.querySelectorAll('.event');
-            events.forEach(event => {
-                event.addEventListener('click', function(event) {
-                    if (!showAllClicked) { // Vérifier si "Afficher tout" n'a pas été cliqué
-                        const isActive = this.classList.contains('active');
-                        document.querySelectorAll('.event').forEach(item => {
-                            item.classList.remove('active');
-                            const img = item.querySelector('.event-img');
-                            if (img) {
-                                img.remove(); // Supprimer l'image de tous les événements
-                            }
-                        });
-                        if (!isActive) {
-                            this.classList.add('active');
-                            // Récupérer le nom du fichier image
-                            const imgName = this.getAttribute('data-img');
-                            if (imgName) {
-                                const img = document.createElement('img');
-                                img.src = "./assets/"+imgName;
-                                img.alt = 'Image';
-                                img.classList.add('event-img');
-                                // Ajouter l'image à l'événement actif
-                                this.appendChild(img);
-                            }
-                        }
-                        event.stopPropagation(); // Empêcher la propagation de l'événement aux éléments parents
-                    }
-                });
-            });
+    document.addEventListener('DOMContentLoaded', function() {
+        const openNewPageButton2 = document.getElementById('page2');
+        openNewPageButton2.addEventListener('click', function() {
+            // Spécifiez l'URL de la nouvelle page ici
+            const newPageURL = 'frise-2015-2024.html';
+            // Ouvre une nouvelle fenêtre ou un nouvel onglet avec l'URL spécifiée
+            window.open(newPageURL, '_blank');
         });
+    });
+</script>
 
-        // Fonction pour activer l'affichage de toutes les descriptions et des images lors du clic sur le bouton "Afficher tout"
-        const showAllButton = document.getElementById('showAllButton');
-        showAllButton.addEventListener('click', function() {
-            showAllClicked = true; // Définir "Afficher tout" comme activé
-            const events = document.querySelectorAll('.event');
-            events.forEach(event => {
-                event.classList.add('active');
-                const existingImg = event.querySelector('.event-img');
-                if (!existingImg) {
-                    const imgName = event.getAttribute('data-img');
-                    if (imgName) {
-                        const img = document.createElement('img');
-                        img.src = "./assets/"+imgName;
-                        img.alt = 'Image';
-                        img.classList.add('event-img');
-                        event.appendChild(img);
-                    }
-                }
-            });
-            this.style.display = 'none'; // Masquer le bouton après usage
-        });
-
-
-    </script>
 </body>
 </html>
-
